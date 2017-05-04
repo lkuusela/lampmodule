@@ -18,6 +18,6 @@
 
 ## Lähteitä
 
-http://simosuominen.com/index.php/2017/04/14/palvelinten-hallinta-kotitehtavat-3/
-https://github.com/rgevaert/puppet-mysql/blob/master/manifests/init.pp
-https://github.com/example42/puppet-mysql
+- http://simosuominen.com/index.php/2017/04/14/palvelinten-hallinta-kotitehtavat-3/
+- https://github.com/rgevaert/puppet-mysql/blob/master/manifests/init.pp
+- https://github.com/example42/puppet-mysql
