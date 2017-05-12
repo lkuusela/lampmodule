@@ -21,6 +21,7 @@
 - http://simosuominen.com/index.php/2017/04/14/palvelinten-hallinta-kotitehtavat-3/
 - https://github.com/rgevaert/puppet-mysql/blob/master/manifests/init.pp
 - https://github.com/example42/puppet-mysql
+- https://github.com/jrodriguezjr/puppet-lamp-stack/blob/master/modules/mysql/manifests/init.pp
 
 
 
@@ -126,3 +127,16 @@ Tämän jälkeen lisäsin tiedostoon vielä .erb päätteen. Alla olevan koodin 
                 notify => Service['apache2'],
         }
 Nyt käyttäjä voi luoda php kotisivut ja ne toimivat. 
+
+### mySQL
+
+MySQL asentuu samalla tavalla, kuin muutkin paketit. Halusin ohittaa mySLQ root tunnuksen luonti vaiheen, joten laitoin root salasanaksi automaattisen salasana generoinnin. Nyt 
+
+         package {'mysql-server':
+                ensure => 'installed',
+                root => ['root_password' => 'auto'],
+                allowcdrom => 'true',
+         }
+
+         
+
