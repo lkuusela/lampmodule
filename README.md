@@ -46,7 +46,7 @@ Git tietueessa moduulini tulee olla polkuna /puppet/modules/lampmodule kuten pol
       $ sudo apt-get update
       $ git clone https://github.com/lkuusela/lampmodule.git
       $ bash apply.sh
-Bash aplly.sh ajaa moduulin normaaliin tapaan. Voin muokata moduulia helposti siirtelemättä sitä mihinkään ja lopuksi tehdä git toimenpiteet päivittääkseni sen githubiin.
+Bash apply.sh ajaa moduulin normaaliin tapaan. Voin muokata moduulia helposti siirtelemättä sitä mihinkään ja lopuksi tehdä git toimenpiteet päivittääkseni sen githubiin.
 
 ### Apache2 ja userdir
 Aloitin moduulin veistämisen Apache2 ja userdir:istä. Halusin kuitenkin, että moduuli suorittaa päivityksen aina ennnen kuin aloittaa ohjelmien asennuksen. 
