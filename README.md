@@ -31,6 +31,7 @@ Ideana on luoda moduuli mikä asentaa LAMP:in ja konfiguroiperusasetukset valmii
 
 ### Työskentely sujuvaksi githubin kanssa
 Työstän moduulia aina live-istunnossa, joten moduulin kopioiminen joka kerta git kansiosta puppet kansioon on hidasta ja ärsyttävää. Jotta näin ei olisi täytyi minun luoda git tietueeseen kaksi tiedostoa;
+
   apply.sh 
 
       sudo puppet apply --modulepath puppet/modules/ -e 'class {lampmodule:}'
