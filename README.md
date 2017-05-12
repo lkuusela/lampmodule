@@ -98,3 +98,31 @@ Enabloi userdir:in ja ilmoittaa apache:lle, jotta tämä voi uudelleen käynnist
                 command => '/usr/sbin/a2enmod userdir',
                 require => Package['apache2'],
         }
+        
+        
+### PHP
+Halusin asentaa php:n normaaliin tapaan ja tehdä käyttäjille mahdolliseksi luoda heti php sivuja kotihakemistoihinsa.
+Package toimii samalla tavalla kun edelläkin olevat, eli asentaa paketin. Käytin taas notify toimintoa jotta apache saisi ilmoituksen tapahtumasta ja vältyttäisiin virheilmotuksilta.
+
+        package {'libapache2-mod-php':
+                ensure => 'installed',
+                notify => Service['apache2'],
+                allowcdrom => 'true',
+        }
+
+Kopioin php7.0.conf tiedoston moduulin templates kansioon. Muokkasin tiedostoa lisäämällä # merkin seuraaviin kohtiin;
+
+    # <IfModule mod_userdir.c>
+    # <Directory /home/*/public_html>
+    # php_admin_flag engine Off
+    # </Directory>
+    # </IfModule>
+
+Tämän jälkeen lisäsin tiedostoon vielä .erb päätteen. Alla olevan koodin mukaan käyttäessään php7.0.conf tiedostoa haku uudelleen ohjataan templateskansiossa sijaitsevaan php7.0.conf.erb tiedostoon johon olin tehnyt edellä olevat muutokset. 
+
+        file { '/etc/apache2/mods-available/php7.0.conf':
+                content => template('lampmodule/php7.0.conf.erb'),
+                require => Package['libapache2-mod-php'],
+                notify => Service['apache2'],
+        }
+Nyt käyttäjä voi luoda php kotisivut ja ne toimivat. 
