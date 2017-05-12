@@ -29,6 +29,24 @@
 ## Moduulin käyttötarkoitus
 Ideana on luoda moduuli mikä asentaa LAMP:in ja konfiguroiperusasetukset valmiiksi. Käyttäjähakemistot enabloidaan ja käyttäjien nettisivut tukevat heti php:tä. MySQL pyritään toteuttamaan, siten että ylläpitäjän ei tarvitsisi luoda omaa käyttäjää taikka positaa root tunnusta. Ainoastaan oman salasanan vaihtaminen/asettaminen jää moduulin ajajan harteille.
 
+### Työskentely sujuvaksi githubin kanssa
+Työstän moduulia aina live-istunnossa, joten moduulin kopioiminen joka kerta git kansiosta puppet kansioon on hidasta ja ärsyttävää. Jotta näin ei olisi täytyi minun luoda git tietueeseen kaksi tiedostoa;
+  apply.sh 
+
+      sudo puppet apply --modulepath puppet/modules/ -e 'class {lampmodule:}'
+      
+  start.sh
+    
+      sudo apt-get update
+      git clone https://github.com/lkuusela/lampmodule.git
+      bash apply.sh
+Git tietueessa moduulini tulee olla polkuna /puppet/modules/lampmodule kuten polku apply.sh sanoo. Kun käynnistän koneen live-tikulla annan seuraavat komennot
+
+      $ sudo apt-get update
+      $ git clone https://github.com/lkuusela/lampmodule.git
+      $ bash apply.sh
+Bash aplly.sh ajaa moduulin normaaliin tapaan. Voin muokata moduulia helposti siirtelemättä sitä mihinkään ja lopuksi tehdä git toimenpiteet päivittääkseni sen githubiin.
+
 ### Apache2 ja userdir
 Aloitin moduulin veistämisen Apache2 ja userdir:istä. Halusin kuitenkin, että moduuli suorittaa päivityksen aina ennnen kuin aloittaa ohjelmien asennuksen. 
 
