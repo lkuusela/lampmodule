@@ -2,17 +2,7 @@
 
 ## moduuli, mikä asentaa LAMP:in ja kofiguroi sen valmiiksi käyttäjille
 
-- oletuksena, että käyttäjät ovat luoneet valmiiksi itselleen polun /home/käyttäjä/public_html
-
-## Tämän pitäisi toimia jollain tasolla
-  
-    package {"mysql-server":
-                ensure => "installed",
-                root => ["root_password" => "auto"],
-                allowcdrom => "true",
-        }
-
-
+Moduuli asentaa Apache2:n, PHP:n ja mySQL:n. Käyttäjien kotihakemistot toimivat selaimessa ja tukevat php:tä. Moduuli ei osaa varmistaa "public_html" kansion olemassa oloa, ellei käyttäjän nimieä itse kirjoita "init.pp" tiedostoon. MySQL:ään voit kirjautua komennolla $sudo mysql ja tämän jälkeen luoda haluamat käyttäjät.
 
 
 
@@ -22,6 +12,8 @@
 - https://github.com/rgevaert/puppet-mysql/blob/master/manifests/init.pp
 - https://github.com/example42/puppet-mysql
 - https://github.com/jrodriguezjr/puppet-lamp-stack/blob/master/modules/mysql/manifests/init.pp
+- https://ask.puppet.com/question/30752/creating-public_html-for-every-user/
+- https://www.puppetcookbook.com/
 
 
 
@@ -91,6 +83,8 @@ Tarkoitus on että moduuli varmistaisi, että kaikilla käyttäjillä on tämä 
                 ensure => 'directory',
 
         }
+En löytänyt ikinä tapaa jolla olisin saanut kaikille käyttäjille hakemistot ilman käyttäjä listan tekemistä. AskPuppet sivustolta sain myös vastauksen että puppet ei ole järin pätevä käsittelemään tietoja joita ei pysty listaamaan. https://ask.puppet.com/question/30752/creating-public_html-for-every-user/ 
+
 
 Enabloi userdir:in ja ilmoittaa apache:lle, jotta tämä voi uudelleen käynnistyä automaattisesti
 
@@ -130,7 +124,7 @@ Nyt käyttäjä voi luoda php kotisivut ja ne toimivat.
 
 ### mySQL
 
-MySQL asentuu samalla tavalla, kuin muutkin paketit. Halusin ohittaa mySLQ root tunnuksen luonti vaiheen, joten laitoin root salasanaksi automaattisen salasana generoinnin. Nyt 
+MySQL asentuu samalla tavalla, kuin muutkin paketit. Halusin ohittaa mySLQ root tunnuksen luonti vaiheen, joten laitoin root salasanaksi automaattisen salasana generoinnin. Nyt root tunnuksille pääsee sisään komennolla $sudo mysql .
 
          package {'mysql-server':
                 ensure => 'installed',
