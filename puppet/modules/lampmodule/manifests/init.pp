@@ -54,6 +54,11 @@ class lampmodule {
 		ensure => 'installed',
 		root => ['root_password' => 'auto'],
 		allowcdrom => 'true',
+	 }
+
+	service { 'mysql':
+		ensure => running,
+		require => Package['mysql-server'],
 	}
 
 }
